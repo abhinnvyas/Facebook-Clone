@@ -6,7 +6,13 @@ import {
   UserGroupIcon,
   FlagIcon,
 } from "@heroicons/react/outline";
-import { HomeIcon } from "@heroicons/react/solid";
+import {
+  HomeIcon,
+  ViewGridIcon,
+  ChatIcon,
+  BellIcon,
+  ChevronDownIcon,
+} from "@heroicons/react/solid";
 import HeaderIcon from "./HeaderIcon";
 
 function Header() {
@@ -18,6 +24,7 @@ function Header() {
       {/* Left */}
       <div className="flex items-center">
         <Image
+          className="cursor-pointer"
           src="https://links.papareact.com/5me"
           width={40}
           height={40}
@@ -25,9 +32,9 @@ function Header() {
         />
 
         <div className="flex ml-2 items-center rounded-full bg-gray-100 p-2">
-          <SearchIcon className="h-6 text-gray-600" />
+          <SearchIcon className="h-6 text-gray-600 cursor-pointer" />
           <input
-            className="flex ml-2 items-center bg-transparent outline-none placeholder-gray-500
+            className="hidden md:inline-flex ml-2 items-center bg-transparent outline-none placeholder-gray-500
             flex-shrink"
             type="text"
             placeholder="Search Facebook"
@@ -47,6 +54,15 @@ function Header() {
       </div>
 
       {/* Right */}
+      <div className="flex items-center sm:space-x-2 justify-end">
+        {/* Profile Picture */}
+        <p className="whitespace-nowrap pr-3 font-semibold">Abhinn Vyas</p>{" "}
+        {/* User's Name */}
+        <ViewGridIcon className="icon" />
+        <ChatIcon className="icon" />
+        <BellIcon className="icon" />
+        <ChevronDownIcon className="icon" />
+      </div>
     </div>
   );
 }
