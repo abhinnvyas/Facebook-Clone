@@ -5,13 +5,13 @@ import Login from "../components/Login";
 
 export default function Home({ session }) {
   if (!session) return <Login />;
+
   return (
     <div>
       <Head>
         <title>Facebook</title>
       </Head>
 
-      {/* Header */}
       <Header />
 
       <main>
