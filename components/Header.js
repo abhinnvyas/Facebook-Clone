@@ -66,7 +66,7 @@ function Header() {
           height={40}
           layout="fixed"
         />
-        <p className="hidden sm:inline whitespace-nowrap pr-3 font-semibold">
+        <p className="hidden lg:inline-flex text-sm whitespace-nowrap pr-3 font-semibold">
           {session.user.name}
         </p>{" "}
         {/* User's Name */}
