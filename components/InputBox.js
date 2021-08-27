@@ -4,7 +4,8 @@ import { EmojiHappyIcon } from "@heroicons/react/outline";
 import { CameraIcon, VideoCameraIcon } from "@heroicons/react/solid";
 import { useRef } from "react";
 import { db } from "../firebase";
-import firebase from "firebase";
+import firebase from "firebase/app";
+import { addDoc, collection, serverTimestamp } from "firebase/firestore";
 
 function InputBox() {
   const [session] = useSession();
@@ -15,13 +16,21 @@ function InputBox() {
 
     if (!inputRef.current.value) return;
 
-    db.collection("posts").add({
+    addDoc(collection(db, "posts"), {
       message: inputRef.current.value,
       name: session.user.name,
       email: session.user.email,
       image: session.user.image,
-      timestamp: firebase.firestore.FieldValue.serverTimestamp(),
+      timestamp: serverTimestamp(),
     });
+
+    // db.collection("posts").add({
+    //   message: inputRef.current.value,
+    //   name: session.user.name,
+    //   email: session.user.email,
+    //   image: session.user.image,
+    //   timestamp: firebase.firestore.FieldValue.serverTimestamp(),
+    // });
 
     inputRef.current.value = "";
   };
