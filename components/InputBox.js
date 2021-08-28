@@ -3,9 +3,15 @@ import Image from "next/image";
 import { EmojiHappyIcon } from "@heroicons/react/outline";
 import { CameraIcon, VideoCameraIcon } from "@heroicons/react/solid";
 import { useRef, useState } from "react";
-import { db } from "../firebase";
-import firebase from "firebase/app";
-import { addDoc, collection, serverTimestamp } from "firebase/firestore";
+import { db, storage } from "../firebase";
+import {
+  addDoc,
+  collection,
+  serverTimestamp,
+  setDoc,
+  doc,
+} from "firebase/firestore";
+import { getDownloadURL, ref, uploadString } from "firebase/storage";
 
 function InputBox() {
   const [session] = useSession();
@@ -24,6 +30,24 @@ function InputBox() {
       email: session.user.email,
       image: session.user.image,
       timestamp: serverTimestamp(),
+    }).then((docPosT) => {
+      if (imageToPost) {
+        const fileRef = ref(storage, `posts/${docPosT.id}`);
+        let id = docPosT.id;
+        removeImage();
+
+        uploadString(fileRef, imageToPost, "data_url").then(() => {
+          getDownloadURL(ref(storage, `posts/${id}`)).then((url) => {
+            setDoc(
+              doc(db, `posts/${id}`),
+              {
+                postImage: url,
+              },
+              { merge: true }
+            );
+          });
+        });
+      }
     });
 
     // db.collection("posts").add({
