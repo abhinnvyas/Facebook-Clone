@@ -10,7 +10,7 @@ import { db } from "../firebase";
 import Post from "./Post";
 
 function Posts({ posts }) {
-  const [realtimePosts, setRealtimePosts] = useState([]);
+  const [realtimePosts, setRealtimePosts] = useState(null);
   useEffect(() => {
     onSnapshot(
       query(collection(db, "posts"), orderBy("timestamp", "desc")),
