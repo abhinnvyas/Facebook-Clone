@@ -1,4 +1,5 @@
 import Image from "next/image";
+import { ChatAltIcon, ShareIcon, ThumbUpIcon } from "@heroicons/react/outline";
 
 function Post({ name, message, email, timestamp, image, postImage }) {
   return (
@@ -23,10 +24,26 @@ function Post({ name, message, email, timestamp, image, postImage }) {
         <p className="pt-4">{message}</p>
       </div>
       {postImage && (
-        <div className="relative h-56 md:h-96 bg-white">
-          <Image src={postImage} layout="fill" objectFit="cover" />
+        <div className="h-56 md:h-96 bg-white">
+          <Image
+            src="https://firebasestorage.googleapis.com/v0/b/facebook-clone-abhinn.appspot.com/o/posts%2FlFH1NN8tAC0aLJW4EL9u?alt=media&token=818e1c89-ed30-4501-b5b1-e982d87a65c6"
+            layout="fill"
+            objectFit="cover"
+          />
         </div>
       )}
+
+      <div
+        className="flex justify-between items-center rounded-b-2xl bg-white shadow-md
+      text-gray-400 border-t"
+      >
+        <div>
+          <ThumbUpIcon className="h-4" />
+          <p className="text-xs sm:text-base">Like</p>
+        </div>
+        <div></div>
+        <div></div>
+      </div>
     </div>
   );
 }
